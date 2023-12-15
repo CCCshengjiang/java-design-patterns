@@ -2,7 +2,7 @@ package cn.cwblue.factory.simple;
 
 import java.util.Scanner;
 
-public class SimpleFactory {
+public class Main {
     public static void main(String[] args) {
        try {
            Scanner sc = new Scanner(System.in);

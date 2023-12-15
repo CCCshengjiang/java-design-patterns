@@ -1,6 +1,6 @@
 # 工厂模式
 
-## 简单工厂模式
+## 简单工厂模式—计算器
 
 现在我们要实现一个简单的计算器，输入两个数字，计算器能够完成加减乘除运算。
 
@@ -227,3 +227,218 @@ public class SimpleFactory {
 **上述程序结构图：**
 
 ![简单工厂模式类的结构图](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312141424340.png)
+
+
+
+
+
+# 策略模式—商场促销
+
+策略模式定义了算法家族，分别封装起来，让他们之间可以互相替换，此模式让算法的变化不会影响到使用算法的客户。
+
+现在有一个商场需要一个收银系统，根据客户所买商品的单价和数量来收费。商场总共有三种销售模式：
+
+1. 第一种是全部商品原价收费
+2. 第二种是全部打八折处理
+3. 第三种是满300返利100
+
+
+
+> 此时可以根据简单工厂模式，收银员只需要输入当前销售模式，让程序自己判断使用哪种计算方式。
+
+**抽象收费类：**
+
+```java
+public abstract class CashSuper {
+    public abstract double acceptCash(double price, int num);
+}
+```
+
+
+
+**正常收费类：**
+
+```java
+public class CashNormal extends CashSuper{
+    @Override
+    public double acceptCash(double price, int num) {
+        return price * num;
+    }
+}
+```
+
+
+
+**打折收费类：**
+
+```java
+public class CashRebate extends CashSuper{
+    private double moneyRebate = 1;
+    //初始化时候要输入打折率
+    public CashRebate(double moneyRebate) {
+        this.moneyRebate = moneyRebate;
+    }
+
+    @Override
+    public double acceptCash(double price, int num) {
+        return price * moneyRebate * num;
+    }
+}
+```
+
+
+
+**返利收费类：**
+
+```java
+public class CashReturn extends CashSuper{
+    //返利条件
+    private double moneyCondition = 0;
+    //返利值
+    private double moneyReturn = 0;
+
+    public CashReturn(double moneyCondition, double moneyReturn) {
+        this.moneyCondition = moneyCondition;
+        this.moneyReturn = moneyReturn;
+    }
+    @Override
+    public double acceptCash(double price, int num) {
+        double res = price * num;
+        if (moneyCondition > 0 && res >= moneyCondition) {
+            res = res - Math.floor(res / moneyCondition) * moneyReturn;
+        }
+        return res;
+    }
+}
+```
+
+
+
+**收费对象生成工厂：**
+
+```java
+public class CashFactory {
+    public static CashSuper createCashAccept(int cashType) {
+        CashSuper cashSuper = null;
+        switch (cashType) {
+            case 1:  //正常收费
+                cashSuper = new CashNormal();
+                break;
+            case 2:  //打八折收费
+                cashSuper = new CashRebate(0.8);
+                break;
+            case 3:  //满300返利100
+                cashSuper = new CashReturn(300, 100);
+                break;
+        }
+        return cashSuper;
+    }
+}
+```
+
+
+
+**界面逻辑：**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入当前销售模式：1：无促销，2：打折，3：返利");
+        int cashType = Integer.parseInt(sc.nextLine()); //商品销售模式
+        System.out.println("请输入当前商品单价：");
+        double price = Double.parseDouble(sc.nextLine()); //商品单价
+        System.out.println("请输入当前商品数量：");
+        int num = Integer.parseInt(sc.nextLine()); //商品数量
+        double totalPrice = 0; //当前商品价格
+
+        CashSuper cashSuper = CashFactory.createCashAccept(cashType);
+        totalPrice = cashSuper.acceptCash(price, num);
+
+        System.out.println("商品总价为：" + totalPrice + "元");
+    }
+}
+```
+
+
+
+**当前程序结构图：**
+
+![image-20231215195127230](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312151951290.png)
+
+
+
+> 虽然此时我们解决了对象的创建问题，但是商场是一个经常性更改折扣额度和返利额度的地方，如果每次都要重新编译部署，这种方式实在是太繁琐了，所以简单工厂不是最好的，这个时候就应该使用策略模式，让这些促销方式封装起来，让他们之间可以相互替换。
+
+改造简单工厂为策略模式，首先把工厂类删除，改造后的程序：
+
+**新增收费上下文类：**
+
+```java
+public class CashContext {
+    private CashSuper cashSuper;
+    public CashContext(int  cashType) {
+        switch (cashType) {
+            case 1:  //正常收费
+                cashSuper = new CashNormal();
+                break;
+            case 2:  //打八折收费
+                cashSuper = new CashRebate(0.8);
+                break;
+            case 3:  //满300返利100
+                cashSuper = new CashReturn(300, 100);
+                break;
+        }
+    }
+
+    public double getResult(double price, int num) {
+        return cashSuper.acceptCash(price, num);
+    }
+}
+```
+
+
+
+**界面逻辑改造：**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入当前销售模式：1：无促销，2：打八折，3：满300返100");
+        int cashType = Integer.parseInt(sc.nextLine()); //商品销售模式
+        System.out.println("请输入当前商品单价：");
+        double price = Double.parseDouble(sc.nextLine()); //商品单价
+        System.out.println("请输入当前商品数量：");
+        int num = Integer.parseInt(sc.nextLine()); //商品数量
+        double totalPrice = 0; //当前商品价格
+
+        totalPrice = new CashContext(cashType).getResult(price, num);
+
+        System.out.println("商品总价为：" + totalPrice + "元");
+    }
+}
+```
+
+
+
+**当前程序结构图：**
+
+![image-20231215203555097](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312152035150.png)
+
+
+
+> 简单工厂模式：我需要让界面也就是客户端，认识两个类：CashSuper和CashFactory
+>
+> 策略模式与简单工厂结合：客户端只需要认识一个类：CashContext
+
+
+
+**总结：**
+
+策略模式是**定义一系列算法的方法**，从用途上，他们完成的是相同的工作，只是具体的实现有所不同，优点：
+
+1. 策略模式可以用相同的方式调用所有的算法，减少了各类算法类与使用算法类的耦合。
+2. 而且策略模式可以对每个算法类进行单独的测试，同时修改任何一个算法类也不影响其它算法类。
+
+总的来说，策略模式封装了变化，只要在分析过程中需要再不同的时间或者场景下用不同的规则，此时就可以考虑用策略模式实现的可能性。
