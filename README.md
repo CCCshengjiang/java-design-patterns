@@ -1,3 +1,9 @@
+# UML样图
+
+关于UML，不做过多说明了，直接看一组很全的样图。之后的程序UML图都是参考此图。
+
+![UML类图样例](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312162125077.jpg)
+
 # 工厂模式
 
 ## 简单工厂模式—计算器
