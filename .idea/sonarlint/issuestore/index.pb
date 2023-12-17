@@ -46,3 +46,17 @@ Q
 !src/cn/cwblue/decorator/Suit.java,3\c\3caebe21a8a118da95f9fdbaa4355b65a1006ab0
 Y
 )src/cn/cwblue/decorator/LeatherShoes.java,5\6\56eaa6454d2d1561254e98bade564209204aca5e
+Z
+*src/cn/cwblue/decorator/improved/Main.java,2\e\2e2417b5659315738f633e7fb8438b81b28dd811
+_
+/src/cn/cwblue/decorator/improved/CashSuper.java,5\8\58ab719f58365af74486736d71435b914e3ffb2f
+[
++src/cn/cwblue/decorator/improved/ISale.java,2\5\25723033ba45ae6152f08b7076d9708c014c0488
+`
+0src/cn/cwblue/decorator/improved/CashNormal.java,c\0\c0d364f8e03e6a7086325e7132be48c30e709532
+`
+0src/cn/cwblue/decorator/improved/CashRebate.java,0\4\04a677c9b9d27b25ef1dcaf0b1a9304c04e15358
+`
+0src/cn/cwblue/decorator/improved/CashReturn.java,8\9\891a094d1a8425294aa5d2d7191e800ed3a44d86
+a
+1src/cn/cwblue/decorator/improved/CashContext.java,0\2\0205823a14e6ffdaea08d8c2bf485f00b5887a32

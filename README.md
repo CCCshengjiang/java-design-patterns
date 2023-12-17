@@ -455,7 +455,7 @@ public class Main {
 
 装饰模式（Decorator）可以动态的给对象添加一些额外的职责。
 
-<img src="D:%5C%E6%A1%8C%E9%9D%A2%5C%E5%85%AC%E4%BC%97%E5%8F%B7" alt="装饰模式结构图"  />
+![装饰模式结构图](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312180009702.png)
 
 > Component是定义一个对象接口，可以给这些对象动态地添加职责。ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。Decorator，装饰抽象类，从外类来扩展Component类的功能，但是对于Component来说，是不需要知道Decorator的存在。
 
@@ -563,6 +563,33 @@ public class LeatherShoes extends Finery{
 
 
 
+**客户端代码：**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Person wen = new Person("小文");
+        System.out.println("第一种装扮：");
+        TShirt tShirt = new TShirt();
+        tShirt.decorate(wen);
+        SweatPants sweatPants = new SweatPants();
+        sweatPants.decorate(tShirt);
+        sweatPants.show();
+
+        System.out.println("第二种装扮：");
+        Suit suit = new Suit();
+        suit.decorate(wen);
+        LeatherShoes leatherShoes = new LeatherShoes();
+        leatherShoes.decorate(suit);
+        leatherShoes.show();
+    }
+}
+```
+
+
+
+
+
 程序的UML图：
 
 ![穿衣服的程序UML图](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312171609611.png)
@@ -574,3 +601,125 @@ public class LeatherShoes extends Finery{
 > 装饰模式有效的把类的核心职责和装饰功能区分开了，而且可以去除相关类中重复的装饰逻辑。
 >
 > ![装饰模式理解](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312171618663.png)
+
+
+
+接下来，我们对之前写过的商场促销做一个升级，使用**简单工厂模式+策略模式+装饰模式**。商场收银之前只支持所有商品都打八折或者都有返利或者都是原价。现在需要加功能，就是在八折的基础上再进行返利活动。要求对之前的代码改动尽可能小。
+
+升级后的代码：
+
+**Component对象接口：**
+
+```java
+public interface ISale {
+    double acceptCash(double price, int num);
+}
+```
+
+
+
+**要装饰的对象：**
+
+```java
+public class CashNormal implements ISale{
+    @Override
+    public double acceptCash(double price, int num) {
+        return price * num;
+    }
+}
+```
+
+
+
+**装饰抽象类：**
+
+```java
+public class CashSuper implements ISale{
+    protected ISale component;
+    public void decorator(ISale component) {
+        this.component = component;
+    }
+    @Override
+    public double acceptCash(double price, int num) {
+        double res = 0;
+        if (component != null) {
+            res = component.acceptCash(price, num);
+        }
+        return res;
+    }
+}
+```
+
+
+
+**具体的装饰类：**
+
+打八折：
+
+```java
+public class CashRebate extends CashSuper{
+    double moneyRebate = 1;
+    public CashRebate(double moneyRebate) {
+        this.moneyRebate = moneyRebate;
+    }
+    @Override
+    public double acceptCash(double price, int num) {
+        double res = price * moneyRebate * num;
+        return super.acceptCash(res, 1);
+    }
+}
+```
+
+返利：
+
+```java
+public class CashReturn extends CashSuper{
+    double moneyCondition = 0;
+    double moneyReturn = 0;
+    public CashReturn(double moneyCondition, double moneyReturn) {
+        this.moneyCondition = moneyCondition;
+        this.moneyReturn = moneyReturn;
+    }
+    @Override
+    public double acceptCash(double price, int num) {
+        double res = price * num;
+        if (moneyCondition > 0 && res >= moneyCondition) {
+            res = res - Math.floor(res / moneyCondition) * moneyReturn;
+        }
+        return super.acceptCash(res, 1);
+    }
+}
+```
+
+
+
+**客户端代码：**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入当前销售模式：1：无促销，2：打八折，3：满300返100, 4：先打八折再返利");
+        int cashType = Integer.parseInt(sc.nextLine()); //商品销售模式
+        System.out.println("请输入当前商品单价：");
+        double price = Double.parseDouble(sc.nextLine()); //商品单价
+        System.out.println("请输入当前商品数量：");
+        int num = Integer.parseInt(sc.nextLine()); //商品数量
+        double totalPrice = 0; //当前商品价格
+
+        totalPrice = new CashContext(cashType).getResult(price, num);
+
+        System.out.println("商品总价为：" + totalPrice + "元");
+    }
+}
+```
+
+![image-20231218001903878](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312180019021.png)
+
+**程序UML图：**
+
+![image-20231218001832679](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312180018837.png)
+
+
+
+> 装饰模式的装饰顺序很重要，比如加密数据和过滤词汇都可以是持久化前的装饰功能，但若是先加密了数据在过滤就会出现问题。

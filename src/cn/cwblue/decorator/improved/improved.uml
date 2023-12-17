@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>cn.cwblue.decorator.improved</OriginalElement>
+  <nodes>
+    <node x="-28.096774193548413" y="408.0">cn.cwblue.decorator.improved.Main</node>
+    <node x="-107.86290322580646" y="-5.0">cn.cwblue.decorator.improved.CashSuper</node>
+    <node x="2.75" y="150.0">cn.cwblue.decorator.improved.CashRebate</node>
+    <node x="-171.11290322580646" y="-111.0">cn.cwblue.decorator.improved.ISale</node>
+    <node x="276.9032258064516" y="250.5">cn.cwblue.decorator.improved.CashContext</node>
+    <node x="-442.0" y="6.5">cn.cwblue.decorator.improved.CashNormal</node>
+    <node x="-251.25000000000003" y="150.0">cn.cwblue.decorator.improved.CashReturn</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cn.cwblue.decorator.improved.CashSuper" target="cn.cwblue.decorator.improved.ISale" relationship="TO_ONE">
+      <point x="-9.67741935369304E-5" y="-50.5" />
+      <point x="9.137" y="-31.0" />
+      <point x="55.387" y="-31.0" />
+      <point x="109.49990322580646" y="27.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.CashNormal" target="cn.cwblue.decorator.improved.ISale" relationship="REALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="-325.0" y="-26.0" />
+      <point x="-93.61290322580646" y="-26.0" />
+      <point x="-93.61290322580646" y="-36.0" />
+      <point x="-112.61290322580646" y="-36.0" />
+      <point x="-58.5" y="27.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.CashContext" target="cn.cwblue.decorator.improved.CashNormal" relationship="CREATE">
+      <point x="-111.5" y="30.0" />
+      <point x="-325.0" y="319.5" />
+      <point x="-0.0" y="39.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.CashContext" target="cn.cwblue.decorator.improved.CashReturn" relationship="CREATE">
+      <point x="-111.5" y="15.0" />
+      <point x="-134.25000000000003" y="304.5" />
+      <point x="-0.0" y="39.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.CashContext" target="cn.cwblue.decorator.improved.ISale" relationship="TO_ONE">
+      <point x="-0.0" y="-39.0" />
+      <point x="388.4032258064516" y="-84.0" />
+      <point x="117.0" y="-0.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.CashRebate" target="cn.cwblue.decorator.improved.CashSuper" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="119.75" y="123.0" />
+      <point x="9.137096774193537" y="123.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.Main" target="cn.cwblue.decorator.improved.CashContext" relationship="CREATE">
+      <point x="80.5" y="-0.0" />
+      <point x="388.4032258064516" y="447.0" />
+      <point x="-0.0" y="39.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.CashContext" target="cn.cwblue.decorator.improved.CashRebate" relationship="CREATE">
+      <point x="-111.5" y="-0.0" />
+      <point x="119.75" y="289.5" />
+      <point x="-0.0" y="39.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.CashSuper" target="cn.cwblue.decorator.improved.ISale" relationship="REALIZATION">
+      <point x="-58.5" y="-50.5" />
+      <point x="-49.36290322580646" y="-26.0" />
+      <point x="-93.61290322580646" y="-26.0" />
+      <point x="-93.61290322580646" y="-36.0" />
+      <point x="-112.61290322580646" y="-36.0" />
+      <point x="-58.5" y="27.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.improved.CashReturn" target="cn.cwblue.decorator.improved.CashSuper" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="-134.25" y="123.0" />
+      <point x="9.137096774193537" y="123.0" />
+      <point x="0.0" y="50.5" />
+    </edge>
+  </edges>
+  <settings layout="分层" zoom="1.0" showDependencies="true" x="29.0" y="187.5" />
+  <SelectedNodes>
+    <node>cn.cwblue.decorator.improved.CashContext</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>内部类</Category>
+    <Category>字段</Category>
+    <Category>属性</Category>
+    <Category>方法</Category>
+    <Category>构造函数</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
