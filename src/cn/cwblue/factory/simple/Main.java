@@ -2,6 +2,11 @@ package cn.cwblue.factory.simple;
 
 import java.util.Scanner;
 
+/**
+ * 简单工厂模式
+ *
+ * @author wen
+ */
 public class Main {
     public static void main(String[] args) {
        try {

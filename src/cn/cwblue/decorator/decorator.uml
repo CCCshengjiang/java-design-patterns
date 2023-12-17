@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>cn.cwblue.decorator</OriginalElement>
+  <nodes>
+    <node x="-43.99999999999997" y="14.0">cn.cwblue.decorator.Finery</node>
+    <node x="176.0" y="25.5">cn.cwblue.decorator.Person</node>
+    <node x="63.75" y="-90.0">cn.cwblue.decorator.ICharacter</node>
+    <node x="204.0" y="165.0">cn.cwblue.decorator.LeatherShoes</node>
+    <node x="-223.0" y="165.0">cn.cwblue.decorator.SweatPants</node>
+    <node x="-71.99999999999997" y="165.0">cn.cwblue.decorator.TShirt</node>
+    <node x="66.0" y="165.0">cn.cwblue.decorator.Suit</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cn.cwblue.decorator.Person" target="cn.cwblue.decorator.ICharacter" relationship="REALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="244.5" y="-11.0" />
+      <point x="125.25" y="-11.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.LeatherShoes" target="cn.cwblue.decorator.Finery" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="276.0" y="140.0" />
+      <point x="56.0" y="140.0" />
+      <point x="-2.8421709430404007E-14" y="50.5" />
+    </edge>
+    <edge source="cn.cwblue.decorator.Finery" target="cn.cwblue.decorator.ICharacter" relationship="REALIZATION">
+      <point x="-2.8421709430404007E-14" y="-50.5" />
+      <point x="56.0" y="-11.0" />
+      <point x="125.25" y="-11.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.TShirt" target="cn.cwblue.decorator.Finery" relationship="GENERALIZATION">
+      <point x="-2.8421709430404007E-14" y="-39.0" />
+      <point x="-13.0" y="140.0" />
+      <point x="56.0" y="140.0" />
+      <point x="-2.8421709430404007E-14" y="50.5" />
+    </edge>
+    <edge source="cn.cwblue.decorator.Suit" target="cn.cwblue.decorator.Finery" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="125.0" y="140.0" />
+      <point x="56.0" y="140.0" />
+      <point x="-2.8421709430404007E-14" y="50.5" />
+    </edge>
+    <edge source="cn.cwblue.decorator.Finery" target="cn.cwblue.decorator.ICharacter" relationship="TO_ONE">
+      <point x="-15.000000000000028" y="-50.5" />
+      <point x="41.0" y="-63.0" />
+      <point x="-61.5" y="0.0" />
+    </edge>
+    <edge source="cn.cwblue.decorator.SweatPants" target="cn.cwblue.decorator.Finery" relationship="GENERALIZATION">
+      <point x="0.0" y="-39.0" />
+      <point x="-157.5" y="140.0" />
+      <point x="56.0" y="140.0" />
+      <point x="-2.8421709430404007E-14" y="50.5" />
+    </edge>
+  </edges>
+  <settings layout="分层" zoom="1.0" showDependencies="true" x="62.5" y="76.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>内部类</Category>
+    <Category>字段</Category>
+    <Category>属性</Category>
+    <Category>方法</Category>
+    <Category>构造函数</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

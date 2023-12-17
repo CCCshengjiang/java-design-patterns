@@ -448,3 +448,129 @@ public class Main {
 2. 而且策略模式可以对每个算法类进行单独的测试，同时修改任何一个算法类也不影响其它算法类。
 
 总的来说，策略模式封装了变化，只要在分析过程中需要再不同的时间或者场景下用不同的规则，此时就可以考虑用策略模式实现的可能性。
+
+
+
+# 装饰模式—穿衣服
+
+装饰模式（Decorator）可以动态的给对象添加一些额外的职责。
+
+<img src="D:%5C%E6%A1%8C%E9%9D%A2%5C%E5%85%AC%E4%BC%97%E5%8F%B7" alt="装饰模式结构图"  />
+
+> Component是定义一个对象接口，可以给这些对象动态地添加职责。ConcreteComponent是定义了一个具体的对象，也可以给这个对象添加一些职责。Decorator，装饰抽象类，从外类来扩展Component类的功能，但是对于Component来说，是不需要知道Decorator的存在。
+
+
+
+现在有一个装扮游戏，需要你给主角穿衣服，最后只需要在控制台打印出来穿的什么衣服就行。利用装饰模式的思想，有一个接口可以给对象动态的添加职责；有一个具体的要装饰的人，还要有一个装饰的抽象类，所有具体的装饰类都继承这个装饰抽象类。
+
+**Component对象接口：**
+
+```java
+public interface ICharacter {
+    void show();
+}
+```
+
+
+
+**具体的对象：**
+
+```java
+public class Person implements ICharacter{
+    private String name;
+    public Person(String name) {
+        this.name = name;
+    }
+    @Override
+    public void show() {
+        System.out.println("装扮的" + name);
+    }
+}
+```
+
+
+
+**装饰抽象类：**
+
+```java
+public abstract class Finery implements ICharacter{
+    protected ICharacter component;
+    public void decorate(ICharacter component) {
+        this.component = component;
+    }
+
+    @Override
+    public void show() {
+        if (component != null) {
+            this.component.show();
+        }
+    }
+}
+```
+
+
+
+**具体的装饰类：**
+
+运动裤
+
+```java
+public class SweatPants extends Finery{
+    @Override
+    public void show() {
+        System.out.print("运动裤");
+        super.show();
+    }
+}
+```
+
+T恤衫：
+
+```java
+public class TShirt extends Finery{
+
+    @Override
+    public void show() {
+        System.out.print("T恤衫");
+        super.show();
+    }
+}
+```
+
+西装：
+
+```java
+public class Suit extends Finery{
+    @Override
+    public void show() {
+        System.out.print("西装");
+        super.show();
+    }
+}
+```
+
+皮鞋：
+
+```java
+public class LeatherShoes extends Finery{
+    @Override
+    public void show() {
+        System.out.print("皮鞋");
+        super.show();
+    }
+}
+```
+
+
+
+程序的UML图：
+
+![穿衣服的程序UML图](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312171609611.png)
+
+> 总结：
+>
+> 装饰模式不需要向旧的类中添加新的装饰代码，它提供了一个非常好的解决方案，它把每个要装饰的功能放在单独的类中，让这个类包装它所需要的装饰对象。总而言之，装饰功能就是将类中的装饰功能从类中移除，可以简化原有的类。
+>
+> 装饰模式有效的把类的核心职责和装饰功能区分开了，而且可以去除相关类中重复的装饰逻辑。
+>
+> ![装饰模式理解](https://gitee.com/CCCshengjiang/blog-img/raw/master/image/202312171618663.png)

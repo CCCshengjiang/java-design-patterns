@@ -2,6 +2,11 @@ package cn.cwblue.strategy;
 
 import java.util.Scanner;
 
+/**
+ * 策略模式
+ *
+ * @author wen
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
