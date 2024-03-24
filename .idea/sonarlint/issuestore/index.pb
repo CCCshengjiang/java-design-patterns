@@ -60,3 +60,9 @@ _
 0src/cn/cwblue/decorator/improved/CashReturn.java,8\9\891a094d1a8425294aa5d2d7191e800ed3a44d86
 a
 1src/cn/cwblue/decorator/improved/CashContext.java,0\2\0205823a14e6ffdaea08d8c2bf485f00b5887a32
+V
+&src/cn/cwblue/singleton/Singleton.java,6\0\606e7b067c8f85d758e9458ad30b74bbc614dc24
+Z
+*src/cn/cwblue/singleton/LazySingleton.java,c\9\c9e71d2c55e56ace1ec98817777d213b25e846e2
+\
+,src/cn/cwblue/singleton/HungrySingleton.java,b\4\b46c4cc60a6287239b53909ba790256bd34f97c3
